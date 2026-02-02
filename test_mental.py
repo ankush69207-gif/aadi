@@ -7,12 +7,16 @@ class TestMentalAI(unittest.TestCase):
     def setUp(self):
         # Backup existing memory if any
         if os.path.exists(MEMORY_FILE):
+            if os.path.exists(MEMORY_FILE + ".bak"):
+                os.remove(MEMORY_FILE + ".bak")
             os.rename(MEMORY_FILE, MEMORY_FILE + ".bak")
         self.memory = MentalMemory()
 
     def tearDown(self):
         # Restore backup
         if os.path.exists(MEMORY_FILE + ".bak"):
+            if os.path.exists(MEMORY_FILE):
+                os.remove(MEMORY_FILE)
             os.rename(MEMORY_FILE + ".bak", MEMORY_FILE)
         elif os.path.exists(MEMORY_FILE):
             os.remove(MEMORY_FILE)
