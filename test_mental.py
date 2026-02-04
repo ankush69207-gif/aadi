@@ -51,5 +51,10 @@ class TestMentalAI(unittest.TestCase):
         self.assertIn("Theek hai, yaad rakhungi!", response)
         self.assertIn("Buy milk", self.memory.get_notes())
 
+    def test_api_setup(self):
+        response = process_input("Set API dummy_key_123", self.memory)
+        self.assertIn("Brain connect ho gaya", response)
+        self.assertEqual(self.memory.get_api_key(), "dummy_key_123")
+
 if __name__ == '__main__':
     unittest.main()
